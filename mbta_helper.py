@@ -3,17 +3,27 @@ MAPQUEST_BASE_URL = "http://open.mapquestapi.com/geocoding/v1/address"
 MBTA_BASE_URL = "https://api-v3.mbta.com/stops"
 
 # Your API KEYS (you need to use your own keys - very long random characters)
-MAPQUEST_API_KEY = ""
+MAPQUEST_API_KEY = "1GJGgIOEKx3NdB0OyKuyc1DeZQNquhO2"
 MBTA_API_KEY = ""
 
 
 # A little bit of scaffolding if you want to use it
+import urllib.request
+import json
+from pprint import pprint
+url = f'http://www.mapquestapi.com/geocoding/v1/address?key={MAPQUEST_API_KEY}&location=Babson%20College'
 
 def get_json(url):
     """
     Given a properly formatted URL for a JSON web API request, return
     a Python JSON object containing the response to that request.
     """
+    
+
+    f = urllib.request.urlopen(url)
+    response_text = f.read().decode('utf-8')
+    response_data = json.loads(response_text)
+    pprint(response_data)
     pass
 
 
@@ -53,3 +63,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+print(get_json(url))
