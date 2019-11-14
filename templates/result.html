@@ -9,14 +9,14 @@
 <body>
     <h1 style = "font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Results</h1>
     <p style = "font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
-        The place you entered is <b>{{place_name}}</b>.
+        You entered: <b>{{place_name}}</b>
     </p>
 
     <p style = "font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
         The nearest MBTA station is <b>{{station_name}}</b>. It is <b>{{is_wheelchair_accessible}}</b> wheelchair accessible.
     </p>
     <p style = "font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
-        <a href="{{ url_for('hello') }}">Go back to MBTA Helper App</a></p>
+        <a href="{{ url_for('hello') }}"><button style = "font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" type="button">Go back to MBTA Helper App</button></a></p>
 </body>
 
 </html>

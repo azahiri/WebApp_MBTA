@@ -11,7 +11,7 @@ def hello():
         try:
             place_name = request.form['name']
             city = request.form['city']
-            state = "MA" #Since MBTA only operates in Greater Boston region, we can set state constant
+            state = "MA" #Since MBTA only operates in Greater Boston region, we can set the state variable constant
 
             place = place_name + ', ' + city + ', ' + state
             print(place_name)

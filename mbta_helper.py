@@ -85,7 +85,7 @@ def main():
     """
     place_name = "133 Mt Auburn St, Watertown, MA 02472" #This is the address of the best restaurant in Watertown
     print(get_lat_long(place_name))
-    print(get_nearest_station(*get_lat_long(place_name)))
+    # print(get_nearest_station(*get_lat_long(place_name)))
     print(find_stop_near(place_name))
 
 if __name__ == '__main__':
