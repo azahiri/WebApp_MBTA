@@ -20,10 +20,12 @@ def get_json(url):
     a Python JSON object containing the response to that request.
     """
     f = urllib.request.urlopen(url)
+
     response_text = f.read().decode('utf-8')
     response_data = json.loads(response_text)
+    # pprint(response_data)
     return response_data
-    pass
+
 # pprint(get_json(url))
 
 def get_lat_long(place_name):
@@ -35,14 +37,14 @@ def get_lat_long(place_name):
     """
     place_name = place_name.replace(' ', '%20')
     url = f'http://www.mapquestapi.com/geocoding/v1/address?key={MAPQUEST_API_KEY}&location={place_name}'
-    response_data = get_json(url)
-    result_lat_long = response_data['results'][0]['locations'][0]['latLng']
-    # pprint(result_lat_long)
-    latitude, longitude = result_lat_long['lat'], result_lat_long['lng']
-    return latitude, longitude
+    # print(url)  
+    place_json = get_json(url)
+    lat = place_json['results'][0]['locations'][0]['latLng']['lat']
+    lon = place_json['results'][0]['locations'][0]['latLng']['lng']
+    # print(lat, lon)
+    return lat, lon
     
-
-print(get_lat_long("Prudential Center"))
+# print(get_lat_long("86 Harrison Ave, Boston, MA 02111"))
 
 def get_nearest_station(latitude, longitude):
     """
@@ -51,38 +53,46 @@ def get_nearest_station(latitude, longitude):
     See https://api-v3.mbta.com/docs/swagger/index.html#/Stop/ApiWeb_StopController_index for URL
     formatting requirements for the 'GET /stops' API.
     """
-    url_MBTA = f'{MBTA_BASE_URL}?api_key={MBTA_API_KEY}&filter[latitude]={latitude}&filter[longitude]={longitude}&sort=distance'
-    response_data_MBTA =get_json(url_MBTA)
-    pprint(response_data_MBTA)
-    try:
-        station = response_data_MBTA['data'][0]['attributes']['name']
-        wheelchair = response_data_MBTA['data'][0]['attributes']['wheelchair_boarding']
-        return station, wheelchair
-    except: 
-        return None, None
-    pass
-print(get_nearest_station("42.3489", "-71.08182"))
+    url = '{}?api_key={}&filter[latitude]={}&filter[longitude]={}&sort=distance'.format(
+        MBTA_BASE_URL,
+        MBTA_API_KEY,
+        latitude,
+        longitude)
+    # print(url)
+    station_json = get_json(url)
+    # pprint(station_json)
+    station_name = station_json['data'][0]['attributes']['name']
+    # print(station_name)
+    station_description = station_json['data'][0]['attributes']['description']
+    if station_description:
+        station_name = station_description
+    # print(station_description)
+    wheelchair_boarding = station_json['data'][0]['attributes']['wheelchair_boarding']
+    if wheelchair_boarding == 0:
+        wheelchair = 'Do not know if this station is wheelchair accessible or not.'
+    elif wheelchair_boarding == 1:
+        wheelchair = 'This station is wheelchair accessible.'
+    else:
+        wheelchair = 'Wheelchair is inaccessible at this station.'
+    return station_name, wheelchair
 
 def find_stop_near(place_name):
     """
     Given a place name or address, return the nearest MBTA stop and whether it is wheelchair accessible.
     """
-    lat, lng = get_lat_long(place_name)
-    stop, station_accessible = get_nearest_station(lat, lng)
-    return stop, station_accessible
-    pass
+    return get_nearest_station(*get_lat_long(place_name))
 
+# print(find_stop_near("86 Harrison Ave, Boston, MA 02111"))
 
-# def main():
-#     """
-#     You can all the functions here
-#     """
-#     pass
+def main():
+    """
+    You can all the functions here
+    """
+    place_name = "133 Mt Auburn St, Watertown, MA 02472" #This is the address of the best restaurant in Watertown
+    print(get_lat_long(place_name))
+    print(get_nearest_station(*get_lat_long(place_name)))
+    print(find_stop_near(place_name))
 
-
-# if __name__ == '__main__':
-#     main()
-
-# print(get_json(url))
-
+if __name__ == '__main__':
+    main()
 

@@ -1,0 +1,21 @@
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h1>Results</h1>
+    <p>
+        The place you entered is <b>{{place_name}}</b>.
+    </p>
+
+    <p>
+        The nearest MBTA station is <b>{{station_name}}</b>. It is <b>{{is_wheelchair_accessible}}</b> wheelchair accessible.
+    </p>
+    <p>
+        <a href="{{ url_for('hello') }}">Go back to MBTA Helper!</a></p>
+</body>
+
+</html>

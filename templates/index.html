@@ -5,6 +5,21 @@
     <title>Amazing app to help you find nearest MBTA station</title>
 </head>
 <body>
+    <h1>MBTA Helper</h1>
+    <form action="" method="post" name="mbta">
+        {% if error %}
+        <p style='color:red'>Invalid place/address. Try some other place or add Boston in the end.</p>
+        {% endif %}
 
+        <p style = "font-family:georgia">
+            Place Name<br>
+            <input type="text" size="20" name='name'><br>
+            City<br>
+            <input type="text" size="20" name='city'><br>
+            State<br>
+            <input type="text" size="20"  name='state'><br>
+        </p>
+        <input type="submit" value="Find Nearest Station" />
+    </form>
 </body>
 </html>
