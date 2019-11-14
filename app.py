@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-
 from mbta_helper import find_stop_near
 
 
@@ -12,7 +11,7 @@ def hello():
         try:
             place_name = request.form['name']
             city = request.form['city']
-            state = "MA" #Since MBTA only operates in Greater Boston region
+            state = "MA" #Since MBTA only operates in Greater Boston region, we can set state constant
 
             place = place_name + ', ' + city + ', ' + state
             print(place_name)

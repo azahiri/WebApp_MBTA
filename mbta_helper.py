@@ -39,10 +39,9 @@ def get_lat_long(place_name):
     url = f'http://www.mapquestapi.com/geocoding/v1/address?key={MAPQUEST_API_KEY}&location={place_name}'
     # print(url)  
     place_json = get_json(url)
-    lat = place_json['results'][0]['locations'][0]['latLng']['lat']
-    lon = place_json['results'][0]['locations'][0]['latLng']['lng']
-    # print(lat, lon)
-    return lat, lon
+    latitude = place_json['results'][0]['locations'][0]['latLng']['lat']
+    longitude = place_json['results'][0]['locations'][0]['latLng']['lng']
+    return latitude, longitude
     
 # print(get_lat_long("86 Harrison Ave, Boston, MA 02111"))
 
