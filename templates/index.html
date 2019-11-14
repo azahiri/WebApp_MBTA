@@ -5,21 +5,21 @@
     <title>Amazing app to help you find nearest MBTA station</title>
 </head>
 <body>
-    <h1>MBTA Helper</h1>
+    <h1 style = "font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">MBTA Helper</h1>
     <form action="" method="post" name="mbta">
         {% if error %}
-        <p style='color:red'>Invalid place/address. Try some other place or add Boston in the end.</p>
+        <p style="color:red; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Invalid place/address. Try again.</p>
         {% endif %}
 
-        <p style = "font-family:georgia">
+        <p style = "font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
             Place Name<br>
-            <input type="text" size="20" name='name'><br>
+            <input type="text" size="20" name='name' required><br>
             City<br>
-            <input type="text" size="20" name='city'><br>
+            <input type="text" size="20" name='city' required><br>
             State<br>
-            <input type="text" size="20"  name='state'><br>
+            <input type="text" size="20"  name='state' required><br>
         </p>
-        <input type="submit" value="Find Nearest Station" />
+        <input style = "font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" type="submit" value="Find Nearest Station" size="20" />
     </form>
 </body>
 </html>
