@@ -65,12 +65,12 @@ def get_nearest_station(latitude, longitude):
     # print(station_description)
     wheelchair_boarding = station_json['data'][0]['attributes']['wheelchair_boarding']
     if wheelchair_boarding == 0:
-        wheelchair = 'Do not know if this station is wheelchair accessible or not.'
+        wheelchair_accessible = 'Do not know if this station is wheelchair accessible or not.'
     elif wheelchair_boarding == 1:
-        wheelchair = 'This station is wheelchair accessible.'
+        wheelchair_accessible = 'This station is wheelchair accessible.'
     else:
-        wheelchair = 'Wheelchair is inaccessible at this station.'
-    return station_name, wheelchair
+        wheelchair_accessible = 'This station is not wheelchair accessible.'
+    return station_name, wheelchair_accessible
 
 def find_stop_near(place_name):
     """
